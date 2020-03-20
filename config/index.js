@@ -37,6 +37,7 @@ const config = {
     '@/pages': path.resolve(__dirname, '..', 'src/pages'),
     '@/store': path.resolve(__dirname, '..', 'src/store'),
     '@/assets': path.resolve(__dirname, '..', 'src/assets'),
+    '@/service': path.resolve(__dirname, '..', 'src/service'),
   },
   defineConstants: {
   },

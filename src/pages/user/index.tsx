@@ -5,6 +5,7 @@ import { AtToast } from 'taro-ui'
 import { RootState } from '@/store/index'
 import { updateUserInfo } from '@/store/userInfo/actions'
 import request from '@/utils/request'
+import { userLogin } from '@/service/user'
 import userImg from '@/assets/user1.png'
 import collectImg from '@/assets/collect.png'
 import suggestImg from '@/assets/suggest.png'
@@ -38,12 +39,9 @@ const User = () => {
       delete curUserInfo.language
       try {
         const loginRes = await login({})
-        const data = await request.post({
-          url: '/login',
-          data: {
-            code: loginRes.code,
-            userInfo: curUserInfo
-          }
+        const data = await userLogin({
+          code: loginRes.code,
+          userInfo: curUserInfo
         })
         if (data) {
           dispatch(updateUserInfo(data))

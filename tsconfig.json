@@ -20,6 +20,7 @@
       "@/pages/*": ["./src/pages/*"],
       "@/store/*": ["./src/store/*"],
       "@/assets/*": ["./src/assets/*"],
+      "@/service/*": ["./src/service/*"],
     },
     "rootDir": ".",
     "jsx": "preserve",
