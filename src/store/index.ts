@@ -1,11 +1,18 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import rootReducer from '../reducers'
+import userInfoReducer from './userInfo/reducers'
+// import rootReducer from '../reducers'
+const rootReducer = combineReducers({
+  userInfo: userInfoReducer
+})
+
+// useSelector 的 state 中类型需要
+export type RootState = ReturnType<typeof rootReducer>
 
 const composeEnhancers =
   typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
       // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
     }) : compose
 

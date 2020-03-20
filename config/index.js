@@ -1,3 +1,5 @@
+const path = require('path')
+
 const config = {
   projectName: 'rubish-classify',
   date: '2020-3-14',
@@ -28,6 +30,13 @@ const config = {
         }
       ]
     ]
+  },
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@/pages': path.resolve(__dirname, '..', 'src/pages'),
+    '@/store': path.resolve(__dirname, '..', 'src/store'),
+    '@/assets': path.resolve(__dirname, '..', 'src/assets'),
   },
   defineConstants: {
   },
@@ -85,7 +94,8 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
-    }
+    },
+    esnextModules: ['taro-ui']
   }
 }
 

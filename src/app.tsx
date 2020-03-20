@@ -1,9 +1,10 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-
+import 'taro-ui/dist/style/index.scss'
 import Index from './pages/index'
 
 import configStore from './store'
+
 
 import './app.less'
 
@@ -24,25 +25,63 @@ class App extends Component {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-  config: Config = {
+  componentDidMount () { }
+
+  config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/classify/index',
+      'pages/practice/index',
+      'pages/user/index',
+      'pages/search/index',
+      'pages/detail/index',
+      'pages/collect/index',
+      'pages/userPractice/index'
     ],
+    tabBar: {
+      list: [
+        {
+          'iconPath': 'assets/home.png',
+          'selectedIconPath': 'assets/home_on.png',
+          pagePath: 'pages/index/index',
+          text: '首页'
+        },
+        {
+          'iconPath': 'assets/classify.png',
+          'selectedIconPath': 'assets/classify_on.png',
+          pagePath: 'pages/classify/index',
+          text: '分类'
+        },
+        {
+          'iconPath': 'assets/practice.png',
+          'selectedIconPath': 'assets/practice_on.png',
+          pagePath: 'pages/practice/index',
+          text: '练习'
+        }, {
+          'iconPath': 'assets/user.png',
+          'selectedIconPath': 'assets/user_on.png',
+          pagePath: 'pages/user/index',
+          text: '我的'
+        }
+      ],
+      'color': '#303133',
+      'selectedColor': '#d81e06',
+      'backgroundColor': '#fff',
+      'borderStyle': 'white'
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: '智能垃圾分类',
       navigationBarTextStyle: 'black'
     }
   }
 
-  componentDidMount () {}
+  componentDidShow () { }
 
-  componentDidShow () {}
+  componentDidHide () { }
 
-  componentDidHide () {}
-
-  componentDidCatchError () {}
+  componentDidCatchError () { }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
