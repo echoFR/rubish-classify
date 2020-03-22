@@ -3,6 +3,7 @@ module.exports = {
     NODE_ENV: '"production"'
   },
   defineConstants: {
+    BASE_URL: '"http://127.0.0.1:7001"'
   },
   mini: {},
   h5: {

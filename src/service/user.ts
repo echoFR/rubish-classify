@@ -6,7 +6,7 @@ export const userLogin = (data: {
   userInfo: IuserInfoType
 }) => {
   return request.post({
-    url: '/login',
+    url: '/api/login',
     data
   })
 }
