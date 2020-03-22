@@ -22,7 +22,7 @@ const Search = () => {
   useEffect(() => {
     const val = value.trim()
     if (val) {
-      console.log(val)
+      console.log('val', val)
     }
   }, [value])
 

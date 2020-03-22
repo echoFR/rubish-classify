@@ -2,7 +2,9 @@ import Taro, { navigateTo } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.less'
 
-const TabList = ({ list = [] }) => {
+const TabList = ({ list = [] }: {
+  list: string[]
+}) => {
   return (
     <View className='tab-list'>
       {
