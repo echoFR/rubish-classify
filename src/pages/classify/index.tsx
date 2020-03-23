@@ -1,25 +1,16 @@
-import Taro, { useEffect, useState } from '@tarojs/taro'
+import Taro, { useEffect, useState, navigateTo } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { AtIndexes, AtTabs, AtTabsPane } from 'taro-ui'
+import { AtIndexes, AtToast, AtSegmentedControl } from 'taro-ui'
 import pinyin from 'tiny-pinyin'
 import { getByCategory } from '@/service/classify'
 import ClassfiyDes from '@/components/ClassfiyDes'
 import './index.less'
 
 const Classify = () => {
-  const alph = 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'
-  const obj = {}
-  alph.split(' ').forEach((item) => {
-    obj[item] = {
-      title: item,
-      key: item,
-      items: []
-    }
-  })
-  const arr = Object.keys(obj).map((key) => obj[key])
   const [type, setType] = useState(0)
-  const [listObj, setListObj] = useState(obj)
-  const [list, setList] = useState(arr)
+  const [allData, setAllData] = useState<any[]>([])
+  const [list, setList] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
   const tabList = [
     {
@@ -37,16 +28,28 @@ const Classify = () => {
     },
   ]
 
-  const getRubish = async () => {
-    const newObj = {}
-    Object.keys(listObj).forEach((key) => {
-      newObj[key] = {
-        ...listObj[key],
+  useEffect(() => {
+    const getAllRubish = async () => {
+      const promiseArr = tabList.map(({ category }) => getByCategory(category))
+      const data = await Promise.all(promiseArr)
+      setAllData(data)
+      getCurList(data)
+    }
+    getAllRubish()
+  }, [])
+
+  const getCurList = (allData) => {
+    setLoading(true)
+    const alph = 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'
+    const obj = {}
+    alph.split(' ').forEach((item) => {
+      obj[item] = {
+        title: item,
+        key: item,
         items: []
       }
     })
-    const obj = Object.assign({}, newObj)
-    const data = await getByCategory(tabList[type]['category'])
+    const data = allData[type] || []
     const reg = /^[a-zA-Z]/
     data.forEach(({ name }) => {
       let parseName = ''
@@ -58,37 +61,44 @@ const Classify = () => {
         })
       }
     })
-    setListObj(obj)
     const arr = Object.keys(obj).map((key) => obj[key])
     setList(arr)
+    setLoading(false)
   }
   useEffect(() => {
-    getRubish()
+    if (allData.length) getCurList(allData)
   }, [type])
+  useEffect(() => {
+    if (!list.length) setLoading(true)
+  }, list)
   return (
     <View className='classify'>
-      <View className='tabs'>
-        <AtTabs
-          animated={false}
-          current={type}
-          tabList={tabList}
-          onClick={(value) => setType(value)}>
-          {
-            tabList.map((item, index) => (
-              <AtTabsPane
-                current={type}
-                index={index}
-                key={item.category}>
-                <ClassfiyDes classify={item} />
-              </AtTabsPane>
-            ))
-          }
-        </AtTabs>
+      <AtSegmentedControl
+        values={tabList.map(({ title }) => title)}
+        onClick={(value) => setType(value)}
+        current={type}
+      />
+      <ClassfiyDes classify={tabList[type]['title']} />
+      <View className='list'>
+        {
+          loading
+            ? <AtToast
+              isOpened
+              hasMask
+              duration={0}
+              text='加载中'
+              status='loading'></AtToast>
+            : <AtIndexes
+              onClick={({ name }) =>
+                navigateTo({
+                  url: `/pages/detail/index?name=${name}`
+                })
+              }
+              topKey=''
+              list={list}
+            ></AtIndexes>
+        }
       </View>
-      <AtIndexes
-        list={list}
-      >
-      </AtIndexes>
     </View>
   )
 }
