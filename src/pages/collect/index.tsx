@@ -4,8 +4,8 @@ import './index.less'
 
 const Collect = () => {
   return (
-    <View>
-      Collect
+    <View className='collect'>
+      暂无收藏
     </View>
   )
 }

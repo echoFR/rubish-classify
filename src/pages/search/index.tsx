@@ -16,7 +16,7 @@ const Search = () => {
   //   return state.userInfo
   // })
   useEffect(() => {
-    setHistoryList(['a', 'b', 'c'])
+    setHistoryList(['卫生纸', '电池'])
     setHotList(['电池', '化妆棉', '果壳'])
   }, [])
   useEffect(() => {

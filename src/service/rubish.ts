@@ -1,0 +1,10 @@
+import request from '@/utils/request'
+
+export const getByName = (name)=>{
+  return request.get({
+    url: '/api/rubbish/name',
+    data: {
+      name
+    }
+  })
+}

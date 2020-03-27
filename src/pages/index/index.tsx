@@ -1,5 +1,6 @@
 import Taro, {
   navigateTo,
+  switchTab,
   getRecorderManager,
   getSetting,
   authorize,
@@ -7,11 +8,18 @@ import Taro, {
   useState,
   saveFile,
   createInnerAudioContext,
+  getApp,
 } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { AtIcon, AtModal } from 'taro-ui'
 import { uploadVoice } from '@/service/home'
 import voiceImg from '@/assets/voice.png'
+import ganImg from '@/assets/gan.png'
+import shiImg from '@/assets/shi.png'
+import khsImg from '@/assets/khs.png'
+import yhImg from '@/assets/yh.png'
+
+
 import './index.less'
 
 const Index = () => {
@@ -83,8 +91,15 @@ const Index = () => {
       }
     })
   }
+  const goClassify = (index) => {
+  }
   return (
     <View className='home'>
+      {/* <View
+        onClick={()=>navigateTo({
+          url: `/pages/detail/index?name=艾草`
+        })}
+      >测试</View> */}
       <AtModal
         isOpened={isOpened}
         title='授权提醒'
@@ -124,6 +139,24 @@ const Index = () => {
             <View>{voiceText.text}</View>
           </View>
         </View>
+      </View>
+      <AtGrid
+        mode='rect'
+        hasBorder={false}
+        columnNum={2}
+        data={[
+          { image: ganImg },
+          { image: shiImg },
+          { image: khsImg },
+          { image: yhImg },
+        ]}
+      >
+      </AtGrid>
+      <View className='classify'>
+        <View><Image src={ganImg} onClick={() => goClassify(0)} /></View>
+        <View><Image src={shiImg} onClick={() => goClassify(1)} /></View>
+        <View><Image src={khsImg} onClick={() => goClassify(2)} /></View>
+        <View><Image src={yhImg} onClick={() => goClassify(3)} /></View>
       </View>
     </View>
   )

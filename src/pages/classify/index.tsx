@@ -1,4 +1,4 @@
-import Taro, { useEffect, useState, navigateTo } from '@tarojs/taro'
+import Taro, { useEffect, useState, navigateTo, getApp } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtIndexes, AtToast, AtSegmentedControl } from 'taro-ui'
 import pinyin from 'tiny-pinyin'
@@ -35,6 +35,8 @@ const Classify = () => {
       setAllData(data)
       getCurList(data)
     }
+    console.log('a')
+   console.log(getApp().globalData)
     getAllRubish()
   }, [])
 

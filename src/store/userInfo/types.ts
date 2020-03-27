@@ -1,5 +1,6 @@
 // State
 export interface IuserInfoType {
+  id?: number
   nickName?: string // 昵称
   avatarUrl?: string // 头像
   gender? : '1' | '2' | '0' // 1男，2女，0未知

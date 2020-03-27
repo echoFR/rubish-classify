@@ -26,12 +26,12 @@ class App extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   componentDidMount () { }
-
   config: Config = {
     pages: [
       'pages/index/index',
       'pages/classify/index',
       'pages/practice/index',
+      'pages/problems/index',
       'pages/user/index',
       'pages/search/index',
       'pages/detail/index',
@@ -39,6 +39,7 @@ class App extends Component {
       'pages/userPractice/index'
     ],
     tabBar: {
+      borderStyle: 'black',
       list: [
         {
           'iconPath': 'assets/home.png',
