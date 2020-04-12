@@ -1,6 +1,7 @@
-import Taro, { useEffect, useState, navigateTo, getApp } from '@tarojs/taro'
+import Taro, { useEffect, useState, navigateTo } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { AtIndexes, AtToast, AtSegmentedControl } from 'taro-ui'
+import Loading from '@/components/Loading'
+import { AtIndexes, AtSegmentedControl } from 'taro-ui'
 import pinyin from 'tiny-pinyin'
 import { getByCategory } from '@/service/classify'
 import ClassfiyDes from '@/components/ClassfiyDes'
@@ -32,11 +33,9 @@ const Classify = () => {
     const getAllRubish = async () => {
       const promiseArr = tabList.map(({ category }) => getByCategory(category))
       const data = await Promise.all(promiseArr)
-      setAllData(data)
-      getCurList(data)
+      data && setAllData(data)
+      data && getCurList(data)
     }
-    console.log('a')
-   console.log(getApp().globalData)
     getAllRubish()
   }, [])
 
@@ -80,17 +79,12 @@ const Classify = () => {
         onClick={(value) => setType(value)}
         current={type}
       />
-      <ClassfiyDes classify={tabList[type]['title']} />
-      <View className='list'>
-        {
-          loading
-            ? <AtToast
-              isOpened
-              hasMask
-              duration={0}
-              text='加载中'
-              status='loading'></AtToast>
-            : <AtIndexes
+      <ClassfiyDes classify={tabList[type]['title']} show={false} />
+      {
+        loading
+          ? <Loading />
+          : <View className='list'>
+            <AtIndexes
               onClick={({ name }) =>
                 navigateTo({
                   url: `/pages/detail/index?name=${name}`
@@ -99,8 +93,8 @@ const Classify = () => {
               topKey=''
               list={list}
             ></AtIndexes>
-        }
-      </View>
+          </View>
+      }
     </View>
   )
 }

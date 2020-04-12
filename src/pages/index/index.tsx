@@ -1,6 +1,5 @@
 import Taro, {
   navigateTo,
-  switchTab,
   getRecorderManager,
   getSetting,
   authorize,
@@ -8,7 +7,6 @@ import Taro, {
   useState,
   saveFile,
   createInnerAudioContext,
-  getApp,
 } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { AtIcon, AtModal } from 'taro-ui'
@@ -30,16 +28,17 @@ const Index = () => {
   const [isOpened, setIsOpened] = useState(false)
   const [openFlag, setOnenFlag] = useState(false)
   const recorderManager = getRecorderManager()
-  const innerAudioContext = createInnerAudioContext()
+  // const innerAudioContext = createInnerAudioContext()
   // 录音开始回调
-  recorderManager.onStart({
-    fail: () => {
-      Taro.showToast({
-        title: `录音失败，请重试`,
-        icon: 'none'
-      })
-    }
-  })
+  // recorderManager.onStart({
+  //   fail: () => {
+  //     Taro.showToast({
+  //       title: `录音失败，请重试`,
+  //       icon: 'none'
+  //     })
+  //   }
+  // })
+
   // 结束回调
   recorderManager.onStop(async (res) => {
     console.log('recorder stop', res)
@@ -140,18 +139,6 @@ const Index = () => {
           </View>
         </View>
       </View>
-      <AtGrid
-        mode='rect'
-        hasBorder={false}
-        columnNum={2}
-        data={[
-          { image: ganImg },
-          { image: shiImg },
-          { image: khsImg },
-          { image: yhImg },
-        ]}
-      >
-      </AtGrid>
       <View className='classify'>
         <View><Image src={ganImg} onClick={() => goClassify(0)} /></View>
         <View><Image src={shiImg} onClick={() => goClassify(1)} /></View>

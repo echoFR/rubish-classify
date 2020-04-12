@@ -1,19 +1,19 @@
 import Taro, { useState, useRouter, useEffect } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import { AtModal } from 'taro-ui'
 import './index.less'
 
 const Problems = () => {
   const router = useRouter()
   const [num, setNum] = useState(1)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState<number>(0)
   const [correct, setCorrect] = useState(0)
   const [error, setError] = useState(0)
   const [list, setList] = useState(['尘土'])
   const [isOpened, setIsOpened] = useState(false)
   useEffect(() => {
-    const { params: { count: initCount = 0 } } = router
-    setCount(initCount)
+    const { params: { count: initCount = '' } } = router
+    setCount(Number(initCount))
   }, [])
 
   const goResult = () => {

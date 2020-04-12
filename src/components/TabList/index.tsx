@@ -3,20 +3,20 @@ import { View } from '@tarojs/components'
 import './index.less'
 
 const TabList = ({ list = [] }: {
-  list: string[]
+  list: any[]
 }) => {
   return (
     <View className='tab-list'>
       {
-        list.map((name) => (
+        list.map((item) => (
           <View
             className='tab'
-            key={name}
+            key={item.name}
             onClick={() => navigateTo({
-              url: `/pages/detail/index?name=${name}`
+              url: `/pages/detail/index?name=${item.name}`
             })}
           >
-            {name}
+            {item.name}
           </View>
         ))
       }

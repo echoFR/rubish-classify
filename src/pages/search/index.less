@@ -1,10 +1,15 @@
 .search {
   &-header {
+    position: sticky;
+    top: 0;
     margin: 5px 10px;
     display: flex;
     padding: 10px;
-    font-size: 34px;
     align-items: center;
+    background-color: #fff;
+    at-input {
+      width: 100%;
+    }
     &-bar {
       flex: 1;
       display: flex;
@@ -14,13 +19,53 @@
       margin-right: 10px;
       padding: 8px;
       .input {
+        width: 100%;
         margin-left: 10px;
-        flex: 1;
         color: #303133;
+        padding: 5px 2px;
+        font-size: 30px;
+        background-color: #F7F7F7;
       }
     }
     .cancel {
       color: #53A8FF;
+    }
+  }
+  .list-box {
+    padding: 0 24px;
+    .list-item {
+      display: flex;
+      align-items: baseline;
+      padding: 20px 0;
+      font-size: 30px;
+      border-bottom: 1px solid #d6e4ef;
+      text {
+        padding: 0 3px;
+      }
+      .name {
+        flex: 1;
+      }
+      .type {
+        color: #F56C6C;
+      }
+    }
+    .empty {
+      text-align: center;
+      margin-top: 20px;
+      transform: translateY(-50%);
+      margin-top: 50%;
+      image {
+        width: 230px;
+        height: 230px;
+        margin-bottom: 20px;
+      }
+      .text {
+        margin-bottom: 20px;
+        .name {
+          color: #F56C6C;
+          font-weight: 600;
+        }
+      }
     }
   }
   .history-box .at-modal__content {

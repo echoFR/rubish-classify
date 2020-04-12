@@ -42,9 +42,7 @@ const User = () => {
           code: loginRes.code,
           userInfo: curUserInfo
         })
-        if (data) {
-          dispatch(updateUserInfo(data))
-        }
+        data && dispatch(updateUserInfo(data))
       } catch (error) {
       }
     } else {

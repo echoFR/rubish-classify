@@ -36,7 +36,8 @@ class App extends Component {
       'pages/search/index',
       'pages/detail/index',
       'pages/collect/index',
-      'pages/userPractice/index'
+      'pages/userPractice/index',
+      'pages/webView/index',
     ],
     tabBar: {
       borderStyle: 'black',
@@ -68,7 +69,6 @@ class App extends Component {
       'color': '#303133',
       'selectedColor': '#d81e06',
       'backgroundColor': '#fff',
-      'borderStyle': 'white'
     },
     window: {
       backgroundTextStyle: 'light',

@@ -4,22 +4,16 @@ import { AtTag, AtIcon } from 'taro-ui'
 import data from './data'
 import './index.less'
 
-const classifyObj = {
-  '湿垃圾': 1,
-  '干垃圾': 2,
-  '可回收垃圾': 3,
-  '有害垃圾': 4
-}
 const ClassfiyDes = ({
   classify,
-  showCommon = true
+  show = true
 }) => {
   const [curData, setCurData] = useState<any>({
     des: '',
     common: '',
     require: ''
   })
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(show)
 
   useEffect(() => {
     if (classify && data[classify]) {
@@ -31,7 +25,7 @@ const ClassfiyDes = ({
       {
         curData
           ? <View>
-            <View className={showCommon ? `des des-${classifyObj[classify]}` : 'des-common'}>
+            <View className={'des-common'}>
               <Text style={{ marginRight: '10px' }}>{classify}：{curData.des}</Text>
               <AtIcon
                 onClick={() => setOpen(!open)}
@@ -44,20 +38,16 @@ const ClassfiyDes = ({
             {
               open
                 ? <View>
-                  {
-                    showCommon
-                      ? <View className='common'>
-                        <Text>常见物品：</Text>
-                        <View className='common-list'>
-                          {
-                            curData.common.split(';').map((name) => (
-                              <AtTag key={name} circle>{name}</AtTag>
-                            ))
-                          }
-                        </View>
-                      </View>
-                      : null
-                  }
+                  <View className='common'>
+                    <Text>常见物品：</Text>
+                    <View className='common-list'>
+                      {
+                        curData.common.split(';').map((name) => (
+                          <AtTag key={name} circle>{name}</AtTag>
+                        ))
+                      }
+                    </View>
+                  </View>
                   <View className='require'>
                     <Text>投放要求：</Text>
                     <View className='require-list'>

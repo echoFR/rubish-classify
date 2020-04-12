@@ -1,12 +1,20 @@
 import Taro, { General } from '@tarojs/taro';
-
+import { getStorageSync } from '@tarojs/taro'
 const interceptor = (chain) => {
   const requestParams = chain.requestParams
-  const { method, data, url } = requestParams
-  // requestParams.header = {
-  //   ...requestParams.header,
-  //   token: ''
-  // }
+  const { url } = requestParams
+  // 添加 token
+  if (!url.includes('/api')) {
+    try {
+      const userInfo = getStorageSync('user_info')
+      const { token = '' } = userInfo
+      requestParams.header = {
+        ...requestParams.header,
+        Authorization: `Bearer ${token}`,
+      }
+    } catch (e) {
+    }
+  }
   return chain.proceed(requestParams)
     .then(res => {
       return res

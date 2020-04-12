@@ -8,3 +8,12 @@ export const getByName = (name)=>{
     }
   })
 }
+
+export const getByNameOne = (name)=>{
+  return request.get({
+    url: '/api/rubbish/nameOne',
+    data: {
+      name
+    }
+  })
+}

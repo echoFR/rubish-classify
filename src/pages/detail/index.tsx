@@ -1,9 +1,7 @@
 import Taro, { useRouter, useState, useEffect } from '@tarojs/taro'
-import { useSelector } from '@tarojs/redux'
-import { RootState } from '@/store/index'
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
-import { getByName } from '@/service/rubish'
+import { getByNameOne } from '@/service/rubish'
 import ClassfiyDes from '@/components/ClassfiyDes'
 import './index.less'
 
@@ -17,14 +15,9 @@ const Detail = () => {
   const router = useRouter()
   const [detail, setDetail] = useState<any>({})
   const [isCollect, setIsCollect] = useState(false)
-  const userInfo = useSelector((state: RootState) => {
-    return state.userInfo
-  })
   const getRubishData = async (name: string) => {
-    const data = await getByName(name)
-    if (data.length) {
-      setDetail(data[0] || {})
-    }
+    const data = await getByNameOne(name)
+    data && data.length && setDetail(data[0] || {})
   }
   useEffect(() => {
     const { params: { name } } = router
@@ -33,12 +26,6 @@ const Detail = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if(userInfo && userInfo.id) {
-      // 通过用户 id 查找收藏列表
-      console.log(userInfo)
-    }
-  }, [userInfo])
 
   const changeCollect = () => {
     if (isCollect) {
@@ -71,7 +58,6 @@ const Detail = () => {
       </View>
       <ClassfiyDes
         classify={classify[detail.category]}
-        showCommon={false}
       ></ClassfiyDes>
     </View>
   )
