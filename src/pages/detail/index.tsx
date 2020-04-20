@@ -1,7 +1,9 @@
 import Taro, { useRouter, useState, useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
+import { useSelector } from '@tarojs/redux'
 import { getByNameOne } from '@/service/rubish'
+import { getCollect, addCollect, deleteCollect } from '@/service/collect'
 import ClassfiyDes from '@/components/ClassfiyDes'
 import './index.less'
 
@@ -13,25 +15,40 @@ const classify = {
 }
 const Detail = () => {
   const router = useRouter()
+  const { params: { name } } = router
   const [detail, setDetail] = useState<any>({})
   const [isCollect, setIsCollect] = useState(false)
+  const userInfo = useSelector((state: any) => {
+    return state.userInfo
+  })
+
   const getRubishData = async (name: string) => {
     const data = await getByNameOne(name)
     data && data.length && setDetail(data[0] || {})
   }
   useEffect(() => {
-    const { params: { name } } = router
-    if (name) {
-      getRubishData(name)
-    }
+    if (name) getRubishData(name)
   }, [])
 
+  const getCollectData = async () => {
+    const data = await getCollect(name)
+    if (data && data.length) setIsCollect(true)
+  }
 
-  const changeCollect = () => {
+  useEffect(() => {
+    if (userInfo.token) getCollectData()
+  }, [userInfo])
+
+  const changeCollect = async () => {
     if (isCollect) {
-      console.log('取消收藏')
+      await deleteCollect(name)
+      setIsCollect(false)
     } else {
-      console.log('添加收藏')
+      await addCollect({
+        name: detail.name,
+        category: detail.category
+      })
+      setIsCollect(true)
     }
   }
   return (

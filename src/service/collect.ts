@@ -1,16 +1,28 @@
 import request from '@/utils/request'
 
-export const getAllCollect = () => {
+export const getCollect = (name?: string) => {
+  const url = '/collect/get'
+  if (name) {
+    return request.get({
+      url,
+      data: {
+        name
+      }
+    })
+  }
   return request.get({
-    url: '/collect/all'
+    url
   })
 }
 
-export const addCollect = (name: string) => {
+export const addCollect = (detail: any) => {
   return request.post({
     url: '/collect/add',
     data: {
-      name
+      data: {
+        ...detail,
+        date: `${new Date().getTime()}`
+      }
     }
   })
 }

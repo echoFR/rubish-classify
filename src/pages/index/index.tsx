@@ -84,9 +84,7 @@ const Index = () => {
       success: (setRes) => {
         const { authSetting } = setRes
         const type = 'scope.record'
-        if (authSetting && authSetting[type]) {
-          recorderManager.stop()
-        }
+        if (authSetting && authSetting[type]) recorderManager.stop()
       }
     })
   }

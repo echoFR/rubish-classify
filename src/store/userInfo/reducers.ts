@@ -9,11 +9,8 @@ import {
 let initialState: IuserInfoType = {}
 try {
   const userInfo = getStorageSync('user_info')
-  if (userInfo) {
-    initialState = userInfo
-  } else {
-    setStorageSync('user_info', {})
-  }
+  if (userInfo) initialState = userInfo
+  else setStorageSync('user_info', {})
 } catch (e) {
 }
 

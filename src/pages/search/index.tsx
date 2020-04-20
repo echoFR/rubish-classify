@@ -45,9 +45,7 @@ const Search = () => {
     data && setHistoryList(data)
   }
   useEffect(() => {
-    if (userInfo.token) {
-      getAllHistoryData()
-    }
+    if (userInfo.token) getAllHistoryData()
   }, [userInfo])
 
 

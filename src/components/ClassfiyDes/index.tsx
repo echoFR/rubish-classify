@@ -16,9 +16,7 @@ const ClassfiyDes = ({
   const [open, setOpen] = useState(show)
 
   useEffect(() => {
-    if (classify && data[classify]) {
-      setCurData(data[classify])
-    }
+    if (classify && data[classify]) setCurData(data[classify])
   }, [classify])
   return (
     <View className='classfiy-des'>

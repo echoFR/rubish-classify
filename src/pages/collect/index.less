@@ -1,6 +1,26 @@
 .collect {
-  text-align: center;
-  position: fixed;
-  top: 42%;
-  left: 42%;
+  padding: 0 4px;
+  .list-item {
+    display: flex;
+    align-items: baseline;
+    padding: 20px;
+    font-size: 30px;
+    border-bottom: 1px solid #d6e4ef;
+    .title {
+      flex: 1;
+      text {
+        padding: 0 3px;
+      }
+      .type {
+        margin-left: 10px;
+        color: #F56C6C;
+      }
+    }
+  }
+  .empty {
+    text-align: center;
+    margin-top: 20px;
+    transform: translateY(50%);
+    margin-top: 50%;
+  }
 }

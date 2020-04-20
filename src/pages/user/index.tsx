@@ -11,18 +11,15 @@ import suggestImg from '@/assets/suggest.png'
 import './index.less'
 
 const User = () => {
-  const userInfo = useSelector((state: RootState) => (state.userInfo))
+  const userInfo = useSelector((state) => (state.userInfo))
   const [needLogin, setNeedLogin] = useState(true)
   const [openToast, setOpenToast] = useState(false)
 
   const dispatch = useDispatch()
 
   const changeNeedLogin = () => {
-    if (userInfo && userInfo.nickName && userInfo.token) {
-      setNeedLogin(false)
-    } else {
-      setNeedLogin(true)
-    }
+    if (userInfo && userInfo.nickName && userInfo.token) setNeedLogin(false)
+    else setNeedLogin(true)
   }
   useEffect(() => {
     changeNeedLogin()
