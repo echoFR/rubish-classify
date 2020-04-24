@@ -4,8 +4,8 @@ import practiceImg from '@/assets/pratice.png'
 import './index.less'
 
 const Practice = () => {
-  const [count, setCount] = useState(10)
-  const selector = [10, 50, 100, 500]
+  const [count, setCount] = useState(3)
+  const selector = [3, 10, 50, 100, 500]
   const startPractice = () => {
     navigateTo({
       url: `/pages/problems/index?count=${count}`
@@ -24,7 +24,7 @@ const Practice = () => {
         <Text>垃圾分类练习</Text>
         <Text className='sub'>从生活点滴做起</Text>
       </View>
-      <Picker mode='selector' range={selector} onChange={onChange}>
+      <Picker value={count} mode='selector' range={selector} onChange={onChange}>
         <View className='picker'>
           <Text className='sub'>题目数量</Text>
           <Text>{count}</Text>

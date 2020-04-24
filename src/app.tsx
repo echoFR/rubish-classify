@@ -31,6 +31,7 @@ class App extends Component {
       'pages/index/index',
       'pages/classify/index',
       'pages/practice/index',
+      'pages/practiceResult/index',
       'pages/problems/index',
       'pages/user/index',
       'pages/search/index',

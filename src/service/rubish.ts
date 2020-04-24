@@ -17,3 +17,9 @@ export const getByNameOne = (name)=>{
     }
   })
 }
+
+export const getAll = ()=>{
+  return request.get({
+    url: '/api/rubbish/all'
+  })
+}
