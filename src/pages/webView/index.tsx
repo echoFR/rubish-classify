@@ -1,7 +1,7 @@
 import Taro, { useRouter, useEffect, useState } from '@tarojs/taro'
 import { View, WebView } from '@tarojs/components'
 
-const UserPractice = () => {
+const SelfWebView = () => {
   const router = useRouter()
   const [wd, setWd] = useState('')
   useEffect(() => {
@@ -17,4 +17,4 @@ const UserPractice = () => {
   )
 }
 
-export default UserPractice
+export default SelfWebView

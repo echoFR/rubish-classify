@@ -31,7 +31,9 @@ interface Ioption {
 }
 const request = {
   http (optipn: Ioption, method) {
-    const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://172.20.10.3:7001' : ''
+    // http://127.0.0.1:7001
+    // http://172.20.10.3:7001
+    const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:7001' : ''
     return Taro.request({
       ...optipn,
       url: BASE_URL + optipn.url,

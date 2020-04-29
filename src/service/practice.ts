@@ -2,16 +2,13 @@ import request from '@/utils/request'
 
 export const getAll = () => {
   return request.get({
-    url: '/practice/all',
-    data: {
-      name
-    }
+    url: '/practice/all'
   })
 }
 
 export const getById = (id: number) => {
   return request.get({
-    url: '/practice/byId',
+    url: '/api//practice/byId',
     data: {
       id
     }

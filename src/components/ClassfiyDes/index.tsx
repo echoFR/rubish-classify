@@ -6,7 +6,8 @@ import './index.less'
 
 const ClassfiyDes = ({
   classify,
-  show = true
+  show = true,
+  type = 0
 }) => {
   const [curData, setCurData] = useState<any>({
     des: '',
@@ -23,7 +24,7 @@ const ClassfiyDes = ({
       {
         curData
           ? <View>
-            <View className={'des-common'}>
+            <View className={type ? `des des-${type}` : 'des-common'}>
               <Text style={{ marginRight: '10px' }}>{classify}：{curData.des}</Text>
               <AtIcon
                 onClick={() => setOpen(!open)}

@@ -76,7 +76,7 @@ const Problems = () => {
     const practice = {
       id,
       date,
-      num,
+      num: count,
       correct_num: correct,
       error_num: error,
       list

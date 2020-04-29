@@ -79,7 +79,10 @@ const Classify = () => {
         onClick={(value) => setType(value)}
         current={type}
       />
-      <ClassfiyDes classify={tabList[type]['title']} show={false} />
+      <ClassfiyDes
+        type={type+1}
+        classify={tabList[type]['title']}
+        show={false} />
       {
         loading
           ? <Loading />

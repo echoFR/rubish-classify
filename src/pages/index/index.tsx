@@ -9,8 +9,9 @@ import Taro, {
   createInnerAudioContext,
 } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
-import { AtIcon, AtModal } from 'taro-ui'
+import { AtIcon, AtModal, AtModalContent } from 'taro-ui'
 import { uploadVoice } from '@/service/home'
+import ClassfiyDes from '@/components/ClassfiyDes'
 import voiceImg from '@/assets/voice.png'
 import ganImg from '@/assets/gan.png'
 import shiImg from '@/assets/shi.png'
@@ -25,6 +26,8 @@ const Index = () => {
     text: '按下语音识别',
     backColor: '#1989fa'
   })
+  const [classify, setClassify] = useState<string>()
+  const [desOpened, setDesOpened] = useState(false)
   const [isOpened, setIsOpened] = useState(false)
   const [openFlag, setOnenFlag] = useState(false)
   const recorderManager = getRecorderManager()
@@ -88,15 +91,14 @@ const Index = () => {
       }
     })
   }
-  const goClassify = (index) => {
+
+  const showClassify = (classify) => {
+    setClassify(classify)
+    setDesOpened(true)
   }
+
   return (
     <View className='home'>
-      {/* <View
-        onClick={()=>navigateTo({
-          url: `/pages/detail/index?name=艾草`
-        })}
-      >测试</View> */}
       <AtModal
         isOpened={isOpened}
         title='授权提醒'
@@ -137,11 +139,14 @@ const Index = () => {
           </View>
         </View>
       </View>
+      <AtModal isOpened={desOpened}>
+        <ClassfiyDes classify={classify} />
+      </AtModal>
       <View className='classify'>
-        <View><Image src={ganImg} onClick={() => goClassify(0)} /></View>
-        <View><Image src={shiImg} onClick={() => goClassify(1)} /></View>
-        <View><Image src={khsImg} onClick={() => goClassify(2)} /></View>
-        <View><Image src={yhImg} onClick={() => goClassify(3)} /></View>
+        <View><Image src={ganImg} onClick={() => showClassify('干垃圾')} /></View>
+        <View><Image src={shiImg} onClick={() => showClassify('湿垃圾')} /></View>
+        <View><Image src={khsImg} onClick={() => showClassify('可回收垃圾')} /></View>
+        <View><Image src={yhImg} onClick={() => showClassify('有害')} /></View>
       </View>
     </View>
   )
